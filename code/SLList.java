@@ -66,17 +66,62 @@ public class SLList{
 	public int size(){
 		return size;
 	}
+
+	/**dis3 1.1*/
+	public void insert(int item, int position){
+		if(position == 0){
+			addFirst(item);
+		}
+		else{
+			IntNode p = first;
+			for (int i = 0; i < position -1; i++){
+			p = p.next;
+			}
+			//IntNode prev = p;
+			IntNode save = p.next;
+			p.next = new IntNode(item,save);
+		}
+
+	}
+	/**dis3 1.2*/
+	public void reverse() {
+		 if (first == null || first.next == null) {
+			 return;
+			 }
+		 IntNode save;
+		 IntNode target;
+		 target = first.next;
+		 first.next = null;
+		 while (target != null){
+		 	save = target.next;
+		 	target.next = first;
+		 	first = target;
+		 	target =save;
+		 }
+	}
+	public void reverseRecur() {
+		 first = reverseHelper(first);
+		 }
+
+		 private IntNode reverseHelper(IntNode lst) {
+		 if (lst == null || lst.next == null) {
+			 return lst;
+			 } else {
+			 IntNode endOfReversed = lst.next;
+			 IntNode reversed = reverseHelper(lst.next);
+			 endOfReversed.next = lst;
+			 lst.next = null;
+			 return reversed;
+			 }
+		 }
 	public static void main(String[] args) {
-		/*SLList L = new SLList(15);
+		SLList L = new SLList(15);
 		L.addFirst(10);
 		L.addFirst(5);
-		int x = L.getFirst();
-		System.out.println(x);*/
-		//empty list
-		SLList x =new SLList();
-		x.addLast(5);
-		System.out.println(x.size());
+		L.addFirst(30);
+		L.insert(20, 2);
+		//L.reverse();
+		L.reverseRecur();
 	}
-
 
 }
